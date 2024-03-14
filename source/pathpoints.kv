@@ -1,0 +1,164 @@
+#:kivy 1.0.9
+
+<GoBackButt@Button>
+    text: "Gå tillbaka till huvudmenyn"
+    height: 100
+    size_hint_y: None
+    halign: "center"
+    valign: "bottom"
+    on_release:
+        app.root.current = "main"
+
+WindowManager:
+    PathPointsMain:
+    FavoritesScreen:
+    AllDiagnosticSubjectsScreen:
+    AllGrossingSubjectsScreen:
+    SubjectScreen:
+    HelpScreen:
+
+<PathPointsMain>:
+    name: "main"
+    GridLayout:
+        cols:1
+        rows: 10
+
+        # add vertical space between the buttons
+        padding: 10
+        spacing: 10
+
+        Label:
+            text: "DIAGNOSTIK / MIKROSKOPI"
+            size_hint_y: 0.15
+            font_size: 32
+            halign: 'center'
+            valign: 'top'
+            text_size: self.size
+
+        Button:
+            text: "Alla ämnesområden"
+            size_hint_y: 0.15
+            on_release:
+                app.root.current = "all_diagnostic_subjects"
+                root.manager.transition.direction = "left"
+
+        Button:
+            text: "Favoriter - diagnostik"
+            size_hint_y: 0.15
+            on_release:
+                app.root.current = "favorites"
+                root.manager.transition.direction = "left"
+
+        Label:
+            text: ""
+            size_hint_y: 0.15
+            font_size: 32
+            halign: 'center'
+            valign: 'top'
+            text_size: self.size
+
+        Label:
+            text: "UTSKÄRNING / MAKR0SKOPI"
+            size_hint_y: 0.15
+            font_size: 32
+            halign: 'center'
+            valign: 'top'
+            text_size: self.size
+
+        Button:
+            text: "Alla ämnesområden"
+            size_hint_y: 0.15
+            on_release:
+                app.root.current = "all_grossing_subjects"
+                root.manager.transition.direction = "left"
+
+        Button:
+            text: "Favoriter - utskärning"
+            size_hint_y: 0.15
+            on_release:
+                app.root.current = "favorites"
+                root.manager.transition.direction = "left"
+
+        Label:
+            text: ""
+            size_hint_y: 0.15
+            font_size: 32
+            halign: 'center'
+            valign: 'top'
+            text_size: self.size
+
+        Button:
+            text: "Exportera loggad data"
+            size_hint_y: 0.15
+            on_release:
+                app.root.current = "help"
+                root.manager.transition.direction = "left"
+
+        Button:
+            text: "Hjälp"
+            size_hint_y: 0.1
+            on_release:
+                app.root.current = "help"
+                root.manager.transition.direction = "left"
+
+<HelpScreen>:
+    name: "help"
+
+
+    Label:
+        text: "\n\nUnder 'Ämnesområden' är alla KVASTs områden listade.\nUnder varje område listas proverna, klicka på dem för att logga poäng.\n\nOm du ofta loggar samma typ av prov kan du lägga till det som en favorit för snabbare åtkomst."
+        font_size: 24
+        halign: 'center'
+        valign: 'top'
+        text_size: self.size
+
+    Label:
+        text: "Problem med appen eller förbättrings förslag?\nMaila eller skriv till mig på teams! //Ludvig"
+        font_size: 24
+        text_size: self.size
+        halign: 'center'
+        valign: 'bottom'
+
+    GoBackButt:
+
+
+<FavoritesScreen>:
+    name: "favorites"
+
+    GoBackButt:
+
+<AllDiagnosticSubjectsScreen>:
+    name: "all_diagnostic_subjects"
+    GridLayout:
+        id: all_subjects_grid
+
+    GoBackButt:
+
+<AllGrossingSubjectsScreen>:
+    name: "all_grossing_subjects"
+    GridLayout:
+        id: all_subjects_grid
+
+    GoBackButt:
+
+
+<SubjectScreen>:
+    name: "subject"
+    GridLayout:
+        id: subject_grid
+
+
+    GoBackButt:
+
+
+<AllGrossingScreen>:
+    name: "allsubjects"
+
+    GoBackButt:
+
+<GrossingScreen>:
+    name: "subject"
+    GridLayout:
+        id: grossing_grid
+
+    GoBackButt:
