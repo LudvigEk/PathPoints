@@ -1,4 +1,5 @@
 #:kivy 1.0.9
+#:import webbrowser webbrowser
 
 <GoBackButt@Button>
     text: "Gå tillbaka till huvudmenyn"
@@ -11,9 +12,10 @@
 
 WindowManager:
     PathPointsMain:
-    FavoritesScreen:
     AllDiagnosticSubjectsScreen:
     AllGrossingSubjectsScreen:
+    FavoriteDiagnosticSubjectsScreen:
+    FavoriteGrossingSubjectsScreen:
     SubjectScreen:
     HelpScreen:
 
@@ -45,8 +47,10 @@ WindowManager:
         Button:
             text: "Favoriter - diagnostik"
             size_hint_y: 0.15
+            on_press:
+                on_press: root.refresh_favorite("favorite_diagnostic_subjects", "favorites/favorites-diagnostics.json", True)
             on_release:
-                app.root.current = "favorites"
+                app.root.current = "favorite_diagnostic_subjects"
                 root.manager.transition.direction = "left"
 
         Label:
@@ -75,8 +79,10 @@ WindowManager:
         Button:
             text: "Favoriter - utskärning"
             size_hint_y: 0.15
+            on_press:
+                on_press: root.refresh_favorite("favorite_grossing_subjects", "favorites/favorites-grossing.json", False)
             on_release:
-                app.root.current = "favorites"
+                app.root.current = "favorite_grossing_subjects"
                 root.manager.transition.direction = "left"
 
         Label:
@@ -104,6 +110,10 @@ WindowManager:
 <HelpScreen>:
     name: "help"
 
+    Label:
+        markup: True
+        text: '[color=#0070E0][u]L\u00E4nk till SVFPs riktlinjedokument[/u][/color]'
+        on_touch_down: webbrowser.open('https://svfp.se/media/v1fjombe/riktlinjer-for-en-patologs-individuella-arbetsbelastning-december-2023.pdf')
 
     Label:
         text: "\n\nUnder 'Ämnesområden' är alla KVASTs områden listade.\nUnder varje område listas proverna, klicka på dem för att logga poäng.\n\nOm du ofta loggar samma typ av prov kan du lägga till det som en favorit för snabbare åtkomst."
@@ -122,11 +132,6 @@ WindowManager:
     GoBackButt:
 
 
-<FavoritesScreen>:
-    name: "favorites"
-
-    GoBackButt:
-
 <AllDiagnosticSubjectsScreen>:
     name: "all_diagnostic_subjects"
     GridLayout:
@@ -141,24 +146,24 @@ WindowManager:
 
     GoBackButt:
 
+<FavoriteGrossingSubjectsScreen>:
+    name: "favorite_grossing_subjects"
+    GridLayout:
+        id: favorite_subjects_grid
+
+    GoBackButt:
+
+<FavoriteDiagnosticSubjectsScreen>:
+    name: "favorite_diagnostic_subjects"
+    GridLayout:
+        id: favorite_subjects_grid
+
+    GoBackButt:
 
 <SubjectScreen>:
     name: "subject"
     GridLayout:
         id: subject_grid
 
-
     GoBackButt:
 
-
-<AllGrossingScreen>:
-    name: "allsubjects"
-
-    GoBackButt:
-
-<GrossingScreen>:
-    name: "subject"
-    GridLayout:
-        id: grossing_grid
-
-    GoBackButt:
